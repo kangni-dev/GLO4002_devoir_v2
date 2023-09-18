@@ -1,12 +1,11 @@
 package ca.ulaval.glo4002.tp.intro.question;
 
+import ca.ulaval.glo4002.tp.intro.question.domaine.Health;
 import org.eclipse.jetty.server.Server;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
 import org.glassfish.jersey.server.ResourceConfig;
 import org.glassfish.jersey.servlet.ServletContainer;
-
-import ca.ulaval.glo4002.tp.intro.question.interfaces.ConfigurationServeurRest;
 
 public class Serveur implements Runnable {
     private static final int PORT = 8181;
@@ -20,7 +19,7 @@ public class Serveur implements Runnable {
         ServletContextHandler contexte = new ServletContextHandler(serveur, "/");
         ResourceConfig configurationPackage = new ResourceConfig()
             .packages("ca.ulaval.glo4002.tp.intro.question")
-            .register(ConfigurationServeurRest.class);
+            .register(Health.class);
         ServletContainer conteneur = new ServletContainer(configurationPackage);
         ServletHolder conteneurServlet = new ServletHolder(conteneur);
 

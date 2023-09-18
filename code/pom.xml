@@ -12,7 +12,7 @@
     <artifactId>code</artifactId>
 
     <properties>
-        <main-class>ca.ulaval.glo4002.tp.intro.question.Serveur</main-class>
+        <main-class>ca.ulaval.glo4002.tp.intro.ca.ulaval.glo4002.tp.intro.question.Serveur</main-class>
     </properties>
 
     <dependencyManagement>
@@ -60,6 +60,16 @@
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>5.10.0</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.8.2</version>
         </dependency>
     </dependencies>
 
