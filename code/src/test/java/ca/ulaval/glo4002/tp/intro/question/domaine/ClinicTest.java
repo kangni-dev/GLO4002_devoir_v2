@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
 public class ClinicTest {
@@ -48,7 +48,44 @@ public class ClinicTest {
 
         Patient sprainPatient = new Patient("john",7,VisibleSymptom.SPRAIN);
         clinic.ajouterPatient(sprainPatient);
-        Assertions.assertEquals(clinic.depiler(), sprainPatient);
+        Assertions.assertEquals(clinic.defiler(), sprainPatient);
+    }
+
+    @Test
+    public void whenSetDoctorTriageType_getDoctorTriageTypeMustReturnTheSame(){
+        TriageType doctorTriageType = TriageType.GRAVITY;
+        clinic.setDoctorTriageType(doctorTriageType);
+        Assertions.assertSame(doctorTriageType, clinic.getTypeOfDoctorTriage());
+    }
+
+    @Test
+    public void givenPatientWithGravity7_whenDoctorTriageTypeIsGravity_patientMustBeFirstOut(){
+        TriageType doctorTriageType = TriageType.GRAVITY;
+        clinic.setDoctorTriageType(doctorTriageType);
+        Patient firstPatient = new Patient("james",2,VisibleSymptom.MIGRAINE);
+
+        Patient gravity7Patient = new Patient("john",7,VisibleSymptom.FLU);
+        Patient thirdPatient = new Patient("johny",3,VisibleSymptom.FLU);
+        clinic.ajouterPatient(firstPatient);
+        clinic.ajouterPatient(gravity7Patient);
+        assertEquals(gravity7Patient,clinic.getDoctorPatientsList().defiler());
+
+    }
+    @Test
+    public void givenManyPatientsWithDifferentsCase_whenAjouterPatient(){
+        TriageType doctorTriageType = TriageType.GRAVITY;
+        clinic.setDoctorTriageType(doctorTriageType);
+        Patient firstPatient = new Patient("james",2,VisibleSymptom.SPRAIN);
+
+        Patient secondPatient = new Patient("john",5,VisibleSymptom.FLU);
+        Patient thirdPatient = new Patient("johny",7,VisibleSymptom.BROKEN_BONE);
+        clinic.ajouterPatient(firstPatient);
+        clinic.ajouterPatient(secondPatient);
+        clinic.ajouterPatient(thirdPatient);
+        int position = clinic.getRadiologiePatientsList().getPosition(thirdPatient);
+
+        assertEquals(1,position);
+
     }
 
     // D'autres méthodes peuvent être nécessaires

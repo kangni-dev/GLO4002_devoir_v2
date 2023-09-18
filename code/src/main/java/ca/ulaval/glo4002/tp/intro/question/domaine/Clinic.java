@@ -3,8 +3,8 @@ package ca.ulaval.glo4002.tp.intro.question.domaine;
 public class Clinic {
     private TriageType  doctorTriageType;
     private TriageType  radiologieTriageType;
-    Fifo doctorPatientsList = new DoctorFifo();
-    Fifo radiologiePatientsList = new RadiologieFifo();
+    DoctorFifo doctorPatientsList = new DoctorFifo();
+    RadiologieFifo radiologiePatientsList = new RadiologieFifo();
     
     public Clinic(TriageType doctorTriageType,TriageType radiologieTriageType) {
         this.doctorTriageType = doctorTriageType;
@@ -16,7 +16,7 @@ public class Clinic {
     }
 
     public TriageType getTypeOfDoctorTriage() {
-        return TriageType.FIFO;
+        return this.doctorTriageType;
     }
 
     public TriageType getTypeOfRadiologieTriage() {
@@ -25,7 +25,7 @@ public class Clinic {
 
     public void ajouterPatient(Patient patient) {
         doctorPatientsList.ajouterPatient(patient);
-        if(patient.getVisibleSymptom()==VisibleSymptom.SPRAIN){
+        if(patient.getVisibleSymptom()==VisibleSymptom.SPRAIN || patient.getVisibleSymptom()==VisibleSymptom.BROKEN_BONE){
             radiologiePatientsList.ajouterPatient(patient);
         }
 
@@ -35,12 +35,17 @@ public class Clinic {
         return doctorPatientsList;
     }
 
-    public Fifo getRadiologiePatientsList() {
+    public RadiologieFifo getRadiologiePatientsList() {
         return radiologiePatientsList;
     }
 
-    public Patient depiler() {
+    public Patient defiler() {
         return doctorPatientsList.defiler();
+    }
+
+    public void setDoctorTriageType(TriageType triageType) {
+        this.doctorTriageType = triageType;
+        doctorPatientsList.setTypeTriage(triageType);
     }
 
 

@@ -5,6 +5,7 @@ import java.util.List;
 
 public class Fifo {
     protected final List<Patient> patients = new ArrayList<Patient>();
+    protected TriageType triageType;
 
     public Fifo(){}
     public boolean isEmpty() {
@@ -26,5 +27,9 @@ public class Fifo {
 
     public int getLength() {
         return patients.size();
+    }
+
+    public int getPosition(Patient patient) {
+        return patients.indexOf(patient);
     }
 }

@@ -18,4 +18,8 @@ public class Patient {
     public VisibleSymptom getVisibleSymptom() {
         return this.visibleSymptom;
     }
+
+    public int getGravity() {
+        return gravity;
+    }
 }
